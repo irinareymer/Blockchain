@@ -17,7 +17,7 @@ def get_hash(index: int, prev_hash: str, data: str, nonce: int):
 
 
 def mine(block: Block):
-    while block.hashcode[-4] != '0000':
+    while block.hashcode[-4:] != '0000':
         block.nonce += random.randint(1, 10)
         block.hashcode = get_hash(block.index, block.prev_hash, block.data, block.nonce)
         block.timestamp = datetime.now()
@@ -35,3 +35,7 @@ def block_from_json(block_dict):
         node_id=int(block_dict['node_id'])
     )
     return block
+
+
+def make_url(host, port):
+    return f"http://{host}:{port}/"
