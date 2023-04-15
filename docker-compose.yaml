@@ -1,0 +1,47 @@
+version: "3.8"
+
+services:
+  node3:
+    build: .
+    container_name: node3
+    network_mode: host
+    environment:
+      - FIRST_PORT=8001
+      - SECOND_PORT=8002
+      - THIRD_PORT=8003
+      - SERVER_ID=3
+      - SERVER_HOST=localhost
+      - SERVER_PORT=8003
+    stdin_open: true
+    tty: true
+
+  node2:
+    build: .
+    container_name: node2
+    network_mode: host
+    environment:
+      - FIRST_PORT=8001
+      - SECOND_PORT=8002
+      - THIRD_PORT=8003
+      - SERVER_ID=2
+      - SERVER_HOST=localhost
+      - SERVER_PORT=8002
+    stdin_open: true
+    tty: true
+
+  node1:
+    build: .
+    container_name: node1
+    network_mode: host
+    environment:
+      - FIRST_PORT=8001
+      - SECOND_PORT=8002
+      - THIRD_PORT=8003
+      - SERVER_ID=1
+      - SERVER_HOST=localhost
+      - SERVER_PORT=8001
+    stdin_open: true
+    tty: true
+    depends_on:
+      - node2
+      - node3
