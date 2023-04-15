@@ -13,12 +13,12 @@ class Block:
             timestamp: datetime,
             node_id: int
     ):
-        self.index = index,
-        self.prev_hash = prev_hash,
-        self.hashcode = hashcode,
-        self.data = data,
-        self.nonce = nonce,
-        self.timestamp = timestamp,
+        self.index = index
+        self.prev_hash = prev_hash
+        self.hashcode = hashcode
+        self.data = data
+        self.nonce = nonce
+        self.timestamp = timestamp
         self.node_id = node_id
 
     def to_json(self):
