@@ -58,16 +58,20 @@ class Node:
         if self.last_block is not None:
             last_block_index = self.last_block.index
         if block.index == last_block_index + 1:
+            print("*** HANDLE RECEIVED BLOCK WITHOUT REJECT ***")
             self.chain.append(block)
             self.last_block = block
             block.print()
             return True
         if block.index == last_block_index and block.timestamp < self.last_block.timestamp:
+            print(f"***BLOCK REJECTED*** {self.last_block.index}, {self.last_block.timestamp}, {self.last_block.hashcode}")
             self.chain[-1] = block
             self.last_block = block
             block.print()
             time.sleep(1)
             return True
+        if block.index > last_block_index:
+            print("*** UNSUPPORTED ERROR ***")
         return False
 
     def is_chain_valid(self):
@@ -80,6 +84,7 @@ class Node:
                 current_block.data,
                 current_block.nonce
             )
+            print(f"*** CHECK index = {current_block.index}, i = {i} ***")
             if current_block.hashcode != current_hash or prev_block.hashcode != current_block.prev_hash:
                 return False
         return True
