@@ -27,7 +27,7 @@ class ServerTestCase(unittest.TestCase):
         server2.start()
         server1.start()
 
-        while len(server3.node.chain) < 20 or len(server2.node.chain) < 20:
+        while len(server3.node.chain) < 20 or len(server2.node.chain) < 20 or len(server1.node.chain) < 20:
             time.sleep(1)
 
         self.assertEqual(server1.node.chain[0].to_json(), server2.node.chain[0].to_json())

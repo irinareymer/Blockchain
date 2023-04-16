@@ -1,4 +1,5 @@
 import json
+import time
 from datetime import datetime
 
 from src import utils
@@ -47,7 +48,6 @@ class Node:
     def handle_received_block(self, received_block):
         json_block = json.loads(received_block)
         block = utils.block_from_json(json_block)
-
         if block.index == 0:
             self.chain.append(block)
             self.last_block = block
@@ -65,6 +65,7 @@ class Node:
             self.chain[-1] = block
             self.last_block = block
             block.print()
+            time.sleep(1)
             return True
         return False
 
