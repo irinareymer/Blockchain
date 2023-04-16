@@ -1,4 +1,5 @@
 import json
+import time
 from datetime import datetime
 
 from src import utils
@@ -65,6 +66,7 @@ class Node:
             self.chain[-1] = block
             self.last_block = block
             block.print()
+            time.sleep(1)
             return True
         return False
 
